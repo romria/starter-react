@@ -8,7 +8,7 @@
 *.lcov
 
 # production
-/build
+/dist
 
 # envs
 .env.local
