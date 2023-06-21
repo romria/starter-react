@@ -8,9 +8,9 @@ const Root = (): ReactElement => (
     <h1>Hello React</h1>
     -----------------------
     <br />
-    <Link to={`not-found-route/42`}>404 page preview</Link>
-    <br/>
-    <Link to={`child`}>Child Route</Link>
+    <Link to="not-found-route/42">404 page preview</Link>
+    <br />
+    <Link to="child">Child Route</Link>
     <br />
     -----------------------
     <Outlet />

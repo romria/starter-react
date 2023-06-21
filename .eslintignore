@@ -1,0 +1,4 @@
+dist/
+*.d.ts
+webpack.config.*.js
+postcss.config.js

@@ -19,14 +19,14 @@ export default function ErrorPage(): ReactElement {
               )}
             </>
           )
-        } else if (error instanceof Error) {
+        } if (error instanceof Error) {
           return <p><i>{error.message}</i></p>;
-        } else if (typeof error === 'string') {
+        } if (typeof error === 'string') {
           return <p><i>{error}</i></p>;
         }
         return <p><i>Unknown error</i></p>
       })()}
-      <br/>
+      <br />
       <Link to="/">Back to Home Page</Link>
     </div>
   );
