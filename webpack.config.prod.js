@@ -19,6 +19,12 @@ module.exports = merge(commonConfig, {
           MiniCssExtractPlugin.loader,
           'css-loader',
           {
+            loader: 'sass-loader', // Compiles Sass to CSS
+            options: {
+              implementation: require("sass"), // Explicitly prefer `dart-sass`
+            },
+          },
+          {
             loader: "postcss-loader",
             options: {
               postcssOptions: {
