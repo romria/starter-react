@@ -17,8 +17,39 @@ module.exports = merge(commonConfig, {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        test: /\.s?css$/,
+        use: [
+          'style-loader', // Creates `style` nodes from JS strings
+          {
+            loader: 'css-loader', // Translates CSS into CommonJS
+            options: {
+              modules: {
+                localIdentName: '[name]_[local]_[hash:base64:5]'
+              },
+            }
+          },
+          {
+            loader: 'sass-loader', // Compiles Sass to CSS
+            options: {
+              implementation: require("sass"), // Explicitly prefer `dart-sass`
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    "postcss-preset-env",
+                    {
+                      // Options
+                    },
+                  ],
+                ],
+              },
+            },
+          },
+        ]
       },
     ]
   }

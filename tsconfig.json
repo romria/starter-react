@@ -100,14 +100,9 @@
 
 //    "plugins": [{ "name": "typescript-plugin-css-modules" }]
   },
-  "include": [
-    "./src/**/*",
-    "./gatsby-node.ts",
-    "./gatsby-config.ts",
-    "./plugins/**/*"
-  ],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": [
-    //    "node_modules/*",
-    "public/*"
+    "node_modules/*",
+    "dist/*"
   ]
 }
