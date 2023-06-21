@@ -47,7 +47,6 @@
     /**/
     "@typescript-eslint/ban-ts-comment": 1,
     /**/
-
     "no-console": 2,
     "no-plusplus": 0,
     "max-len": 0,
@@ -104,22 +103,22 @@
     "jsx-a11y/alt-text": 2,
     "jsx-a11y/click-events-have-key-events": 0,
     "jsx-a11y/mouse-events-have-key-events": 0
-  }
-//  "overrides": [
-//    {
-//      "files": ["*.ts", "*.tsx"],
-//      "rules": {
-//        "@typescript-eslint/explicit-function-return-type": 2,
-//        "react/require-default-props":  0
-//      }
-//    },
-//    {
-//      "files": ["*.js"],
-//      "rules": {
-//        "@typescript-eslint/no-var-requires": 0
-//      }
-//    }
-//  ],
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": 2,
+        "react/require-default-props":  0
+      }
+    },
+    {
+      "files": ["*.js"],
+      "rules": {
+        "@typescript-eslint/no-var-requires": 0
+      }
+    }
+  ]
 //  "settings": {
 //    "import/resolver": {
 //      "node": {
