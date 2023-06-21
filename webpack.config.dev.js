@@ -10,7 +10,6 @@ module.exports = merge(commonConfig, {
     static: {
       directory: path.join(__dirname, 'public')
     },
-    open: true,
     hot: true,
     liveReload: true,
   },
@@ -28,27 +27,7 @@ module.exports = merge(commonConfig, {
               },
             }
           },
-          {
-            loader: 'sass-loader', // Compiles Sass to CSS
-            options: {
-              implementation: require("sass"), // Explicitly prefer `dart-sass`
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              postcssOptions: {
-                plugins: [
-                  [
-                    "postcss-preset-env",
-                    {
-                      // Options
-                    },
-                  ],
-                ],
-              },
-            },
-          },
+          'postcss-loader',
         ]
       },
     ]
