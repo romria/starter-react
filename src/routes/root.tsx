@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react';
+import React, {type ReactElement} from 'react';
 import {Outlet, Link} from 'react-router-dom';
 
 import styles from './root.module.scss';

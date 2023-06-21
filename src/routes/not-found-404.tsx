@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react';
+import React, {type ReactElement} from 'react';
 import {useRouteError, isRouteErrorResponse, Link} from 'react-router-dom';
 
 export default function ErrorPage(): ReactElement {
@@ -18,13 +18,13 @@ export default function ErrorPage(): ReactElement {
                 </p>
               )}
             </>
-          )
+          );
         } if (error instanceof Error) {
           return <p><i>{error.message}</i></p>;
         } if (typeof error === 'string') {
           return <p><i>{error}</i></p>;
         }
-        return <p><i>Unknown error</i></p>
+        return <p><i>Unknown error</i></p>;
       })()}
       <br />
       <Link to="/">Back to Home Page</Link>

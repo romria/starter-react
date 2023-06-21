@@ -7,7 +7,7 @@ import Child from './routes/children';
 import NotFound from './routes/not-found-404';
 
 const rootElement = document.getElementById('root');
-if (!rootElement) throw new Error('Failed to find the root element');
+if (rootElement === null) throw new Error('Failed to find the root element');
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
       {
         path: '/child',
         element: <Child />,
-      }
+      },
     ],
   },
 ]);
@@ -28,5 +28,5 @@ const root = createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

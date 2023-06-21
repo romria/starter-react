@@ -58,7 +58,12 @@
     "no-mixed-operators": 1,
     "no-case-declarations": 2,
     "no-nested-ternary": 0,
-    "object-curly-spacing": [2, "never"],
+
+    // Note: you must disable the base rule as it can report incorrect errors
+    // https://typescript-eslint.io/rules/object-curly-spacing/#options
+    "object-curly-spacing": "off",
+    "@typescript-eslint/object-curly-spacing": "off",
+
     "object-curly-newline": [2, {
       "multiline": true,
       "consistent": true
