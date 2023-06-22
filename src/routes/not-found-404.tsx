@@ -6,13 +6,12 @@ export default function ErrorPage(): ReactElement {
   let errorMessage: string;
 
   if (isRouteErrorResponse(error)) {
-    errorMessage = `${error.status} - ${error.statusText}. "${error.error?.message || error.data?.message}"`;
+    errorMessage = `${error.status} - ${error.statusText}. "${(error.error != null) ? error.error.message : ''}"`;
   } else if (error instanceof Error) {
     errorMessage = error.message;
   } else if (typeof error === 'string') {
     errorMessage = error;
   } else {
-    console.error(error);
     errorMessage = 'Unknown error';
   }
 

@@ -15,22 +15,28 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        test: /\.(js|jsx)$/i,
         use: 'babel-loader',
+        exclude: /node_modules/
       },
       {
-        test: /\.tsx?$/,
+        test: /\.tsx?$/i,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.(jpg|jpeg|png|gif)$/i,
-        type: 'asset/resource',
+        type: 'asset/resource'
       },
       {
-        test: /\.svg/,
+        test: /\.svg/i,
         type: 'asset/inline'
+      },
+      {
+        test: /\.(eot|otf|ttf|woff|woff2)$/i,
+        generator: {
+          filename: './fonts/[name][ext][query]'
+        }
       }
     ],
   },

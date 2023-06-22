@@ -11,9 +11,9 @@ const Child = (): ReactElement => (
     <div>
       <Link to="/">Back to Home Page</Link>
     </div>
-    <img src={exampleJPG} alt="import external image example" />
+    <img src={exampleJPG} alt="import as external example" />
     <br />
-    <img src={exampleSVG} alt="import inline svg example" />
+    <img src={exampleSVG} alt="import as inline example" />
   </div>
 );
 
