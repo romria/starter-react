@@ -1,0 +1,7 @@
+@import './constants/variables.scss';
+
+body {
+  background-color: $body-bg-color;
+  color: white;
+  font-family: Lora, sans-serif;
+}

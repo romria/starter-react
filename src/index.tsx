@@ -2,9 +2,9 @@ import React from 'react';
 import {createRoot} from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import './assets/fonts/fonts.css';
-import './index.css';
+import './index.scss';
 import Root from './routes/root';
-import Child from './routes/children';
+import Child from './routes/child';
 import NotFound from './routes/not-found-404';
 
 const rootElement = document.getElementById('root');

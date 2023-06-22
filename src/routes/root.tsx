@@ -1,7 +1,7 @@
 import React, {type ReactElement} from 'react';
 import {Outlet, Link} from 'react-router-dom';
 
-import styles from './root.module.scss';
+import styles from './root.scss';
 
 const Root = (): ReactElement => (
   <div className={styles.root}>

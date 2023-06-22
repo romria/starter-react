@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import exampleJPG from '../assets/images/example.jpg';
 import exampleSVG from '../assets/images/quiz.svg';
 
-import styles from './child.module.scss';
+import styles from './child.scss';
 
 const Child = (): ReactElement => (
   <div className={styles.root}>
