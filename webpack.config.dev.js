@@ -12,6 +12,7 @@ module.exports = merge(commonConfig, {
     },
     hot: true,
     liveReload: true,
+    historyApiFallback: true,
   },
   module: {
     rules: [

@@ -12,6 +12,7 @@ export default function ErrorPage(): ReactElement {
   } else if (typeof error === 'string') {
     errorMessage = error;
   } else {
+    console.error(error);
     errorMessage = 'Unknown error';
   }
 
