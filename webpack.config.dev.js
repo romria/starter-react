@@ -19,9 +19,9 @@ module.exports = merge(commonConfig, {
       {
         test: /\.s?css$/,
         use: [
-          'style-loader', // Creates `style` nodes from JS strings
+          'style-loader',
           {
-            loader: 'css-loader', // Translates CSS into CommonJS
+            loader: 'css-loader',
             options: {
               modules: {
                 localIdentName: '[name]_[local]_[hash:base64:5]'

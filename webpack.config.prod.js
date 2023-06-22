@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 // const path = require('path');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const ProgressPlugin = require('progress-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -38,7 +37,6 @@ module.exports = merge(commonConfig, {
     ],
   },
   plugins: [
-    new ProgressPlugin(),
     new BundleAnalyzerPlugin(),
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({ //<--key to reduce React's size
