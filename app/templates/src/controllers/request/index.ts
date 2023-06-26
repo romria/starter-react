@@ -33,13 +33,12 @@ const request = async <T>(params: RequestParams): Promise<{data?: Promise<T>, er
 
   try {
     const response = await fetch(url, init);
-    if (!response.ok) {
-      throw new Error(`HTTP status ${response.status}`);
+    if (response.ok) {
+      const json = await response.json() as Promise<T>;
+      return {data: json};
     }
 
-    const json = await response.json() as Promise<T>;
-
-    return {data: json};
+    return {errors: [`HTTP error status ${response.status}`]};
   } catch (error) {
     const errors = [];
 
