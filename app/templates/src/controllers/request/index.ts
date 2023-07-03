@@ -12,7 +12,7 @@ interface RequestParams {
 // Recursive objects are not supported here
 const qsStringify = (body: KeyValuePairs): string => new URLSearchParams(body).toString();
 // If you need recursive objects/params then install 'qs' lib
-// const qsStringifyRecursive = (body: KeyValuePairs): string => qs.stringify(body);
+// const qsStringifyRecursive = (body: Record<string, Record | string>): string => qs.stringify(body);
 
 const request = async <T>(params: RequestParams): Promise<{data?: Promise<T>, errors?: string[]}> => {
   const {
@@ -38,9 +38,9 @@ const request = async <T>(params: RequestParams): Promise<{data?: Promise<T>, er
       return {data: json};
     }
 
-    return {errors: [`HTTP error status ${response.status}`]};
+    return {errors: [`HTTP responded with status ${response.status}`]};
   } catch (error) {
-    const errors = [];
+    const errors : string[] = [];
 
     if (error instanceof SyntaxError) {
       errors.push(`Parsing response failed: ${error.message}`);
