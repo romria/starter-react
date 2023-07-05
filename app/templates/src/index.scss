@@ -1,7 +1,33 @@
 @import './constants/variables.scss';
 
-body {
-  background-color: $body-bg-color;
-  color: white;
-  font-family: Lora, sans-serif;
+* {
+  box-sizing: border-box;
 }
+
+// main layout overrides for header/main/footer tags
+html, body, :global(#root) {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+// global overrides from bootstrap
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+// define layout basics
+body {
+  background-color: $color-body-bg;
+  color: $color-font-primary;
+  font-family: Inter, sans-serif;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 500;
+}
+

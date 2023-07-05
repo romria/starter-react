@@ -40,7 +40,7 @@ const request = async <T>(params: RequestParams): Promise<{data?: Promise<T>, er
 
     return {errors: [`HTTP responded with status ${response.status}`]};
   } catch (error) {
-    const errors : string[] = [];
+    const errors: string[] = [];
 
     if (error instanceof SyntaxError) {
       errors.push(`Parsing response failed: ${error.message}`);

@@ -1,0 +1,32 @@
+@import '../../constants/variables.scss';
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.form {
+  border-radius: 6px;
+  padding: 16px;
+  font-size: 14px;
+  border: 1px solid $color-border;
+  width: 320px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.submit {
+  width: 100%;
+}

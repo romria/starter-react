@@ -1,0 +1,25 @@
+@import "../../constants/variables.scss";
+
+.input {
+  box-sizing: border-box;
+  display: block;
+  padding: 5px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #495057;
+  border: 1px solid $color-border-form;
+  border-radius: 6px;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+  &:focus {
+    color: #495057;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  }
+
+  &::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+  }
+}
