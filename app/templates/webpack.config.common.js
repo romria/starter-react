@@ -11,10 +11,14 @@ module.exports = {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    assetModuleFilename: 'static/[name][ext][query]'
+    assetModuleFilename: '[name][ext][query]'
   },
   module: {
     rules: [
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+      },
       {
         test: /\.(js|jsx)$/i,
         use: 'babel-loader',
