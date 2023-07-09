@@ -5,7 +5,7 @@ import classes from './footer.scss';
 
 const Footer = (): ReactElement => (
   <footer className={classes.footer}>
-    Footer Content, Status, etc.
+    Footer Placeholder
   </footer>
 );
 

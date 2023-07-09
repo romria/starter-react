@@ -11,7 +11,6 @@ import Login from './routes/login';
 import RouteError from './routes/route-error';
 import Dashboard from './routes/dashboard';
 import DashboardIndex from './routes/dashboard-index';
-import DashboardUsers from './routes/dashboard-users';
 import DashboardReports from './routes/dashboard-reports';
 
 const rootElement = document.getElementById('root');
@@ -30,7 +29,6 @@ const router = createBrowserRouter([
         element: <Dashboard />,
         children: [
           {index: true, element: <DashboardIndex />},
-          {path: '/dashboard/users', element: <DashboardUsers />},
           {path: '/dashboard/reports', element: <DashboardReports />},
         ],
       },

@@ -7,8 +7,6 @@ type Props = Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange'> & {
   onChange: (value: string) => void
 };
 
-// type Props = InputHTMLAttributes<HTMLInputElement>
-
 const Input = ({
   className,
   onChange,

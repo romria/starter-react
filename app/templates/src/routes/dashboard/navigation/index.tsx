@@ -3,7 +3,6 @@ import {useLocation} from 'react-router-dom';
 import Link from '../../../components/link';
 import SVGHome from '../../../components/svg/home';
 import SVGChartPie from '../../../components/svg/chart-pie';
-import SVGApps from '../../../components/svg/apps';
 
 import classes from './navigation.scss';
 
@@ -13,16 +12,6 @@ const NAVI_ELEMENTS: Array<{type: string, route?: string, label: string, Icon?: 
     route: '/dashboard',
     label: 'Home',
     Icon: SVGHome,
-  },
-  {
-    type: 'head',
-    label: 'MANAGEMENT',
-  },
-  {
-    type: 'link',
-    route: '/dashboard/users',
-    label: 'Users',
-    Icon: SVGApps,
   },
   {
     type: 'head',
@@ -43,7 +32,8 @@ const Navigation = (): ReactElement => {
     <div className={classes.navigation}>
       {NAVI_ELEMENTS.map(({type, route, Icon, label}) => {
         if (type === 'link' && Icon !== undefined && route !== undefined) {
-          const isActive = pathname.includes(route);
+          const isIndexRoute = route === '/dashboard';
+          const isActive = isIndexRoute ? pathname === route : pathname.includes(route);
 
           return (
             <Link
@@ -51,6 +41,7 @@ const Navigation = (): ReactElement => {
               className={classes.naviLink}
               activeClassName={classes.active}
               to={route}
+              end={isIndexRoute}
             >
               <Icon className={classes.linkIcon} fill={isActive ? '#4A46FF' : undefined} />
               <div className={classes.linkLabel}>{label}</div>

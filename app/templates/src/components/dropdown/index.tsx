@@ -42,7 +42,7 @@ const Dropdown = ({children, overlay}: Props): ReactElement => {
   };
 
   return (
-    <div className={classes.container}>
+    <div>
       <div
         onClick={onShow}
         onKeyDown={onKeyDownTrigger}
