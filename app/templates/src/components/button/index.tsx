@@ -15,6 +15,7 @@ const Button = ({
 }: Props): ReactElement => (
   <button
     className={cs(classes.button, {[classes.primary]: isPrimary}, className)}
+    type="button"
     {...props}
   >
     {children}

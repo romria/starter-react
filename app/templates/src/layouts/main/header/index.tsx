@@ -1,9 +1,9 @@
-import React, {type ReactElement} from 'react';
+import React, {type ReactElement, useCallback} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 import Link from '../../../components/link';
 import Button from '../../../components/button';
-import {useAuth, AuthActionType} from '../../../state/auth';
+import {useAuth} from '../../../state/auth';
 import FakeLogo from '../../../assets/images/fake-logo.jpg';
 import Notification from '../../../assets/images/notification.svg';
 import Settings from '../../../assets/images/settings.svg';
@@ -11,13 +11,13 @@ import Settings from '../../../assets/images/settings.svg';
 import classes from './header.scss';
 
 const Header = (): ReactElement => {
-  const {state: {isLogged, username}, authDispatch} = useAuth();
+  const {state: {isLogged}, logout} = useAuth();
   const navigate = useNavigate();
 
-  const onLogout = (): void => {
-    authDispatch({type: AuthActionType.LOGOUT});
+  const onLogout = useCallback((): void => {
+    logout();
     navigate('/');
-  };
+  }, [logout, navigate]);
 
   return (
     <header className={classes.header}>

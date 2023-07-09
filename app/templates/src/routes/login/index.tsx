@@ -1,27 +1,39 @@
-import React, {type FormEvent, type ReactElement, useState, useEffect} from 'react';
+import React, {type FormEvent, type ReactElement, useEffect, useCallback} from 'react';
 import {useNavigate} from 'react-router-dom';
 import Input from '../../components/input';
 import Button from '../../components/button';
-import {useAuth, AuthActionType} from '../../state/auth';
+import {useAuth} from '../../state/auth';
+import {useLogin} from '../../state/login';
 
 import classes from './login.scss';
 
 const Login = (): ReactElement => {
-  const [username, onChangeUsername] = useState('');
-  const [password, onChangePassword] = useState('');
-  const {state: {isLogged}, authDispatch} = useAuth();
+  const {state: {username, password}, changeLoginFormValue, clearLoginForm} = useLogin();
+  const {state: {isLogged}, setLoggedUser} = useAuth();
   const navigate = useNavigate();
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
+  useEffect(() => {
+    if (isLogged) navigate('/dashboard', {replace: true});
+  }, [isLogged, navigate]);
+
+  const onChangeUsername = useCallback(
+    (value: string): void => { changeLoginFormValue('username', value); },
+    [changeLoginFormValue],
+  );
+  const onChangePassword = useCallback(
+    (value: string): void => { changeLoginFormValue('password', value); },
+    [changeLoginFormValue],
+  );
+
+  const onSubmit = useCallback((e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    // ToDo: submit form action
+    // ToDo: submit form request Promise
 
-    onChangeUsername('');
-    onChangePassword('');
-    authDispatch({type: AuthActionType.SET_LOGGED_USER, payload: {username: 'Charlie', role: 'admin'}});
+    setLoggedUser({username, role: 'admin'});
+    clearLoginForm();
     navigate('/dashboard');
-  };
+  }, [setLoggedUser, clearLoginForm, navigate, username]);
 
   return (
     <div className={classes.login}>
@@ -30,22 +42,24 @@ const Login = (): ReactElement => {
         acceptCharset="UTF-8"
         onSubmit={onSubmit}
       >
-        <label className={classes.label} htmlFor="username">Username</label>
+        <div className={classes.label}>Username</div>
         <Input
           className={classes.input}
           id="username"
           type="text"
           name="username"
           value={username}
+          required
           onChange={onChangeUsername}
         />
-        <label className={classes.label} htmlFor="password">Password</label>
+        <div className={classes.label}>Password</div>
         <Input
           className={classes.input}
           id="password"
           type="password"
           name="password"
           value={password}
+          required
           onChange={onChangePassword}
         />
         <Button

@@ -1,6 +1,24 @@
 {
   "extends": ["stylelint-config-standard-scss"],
   "rules": {
-    "scss/at-import-partial-extension": null
+    "scss/at-import-partial-extension": null,
+    "block-no-empty": [
+      true,
+      {"severity": "warning"}
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {"ignorePseudoClasses": ["global"]}
+    ],
+    "selector-class-pattern": [
+      "^[a-z][a-zA-Z0-9]*$",
+      {"message": "Class selector should be camelCased"}
+    ],
+    "keyframes-name-pattern": [
+      "^[a-z][a-zA-Z0-9]*$",
+      {"message": "Keyframe name should be camelCased"}
+    ],
+    "comment-empty-line-before": null,
+    "scss/double-slash-comment-whitespace-inside": null
   }
 }

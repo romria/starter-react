@@ -11,8 +11,8 @@ const Dashboard = (): ReactElement => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLogged) navigate('/login');
-  }, []);
+    if (!isLogged) navigate('/login', {replace: true});
+  }, [isLogged, navigate]);
 
   return (
     <div className={classes.dashboard}>

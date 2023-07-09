@@ -1,17 +1,21 @@
-import React, {createContext, useContext, useReducer, useMemo} from 'react';
+import React, {createContext, useContext, useReducer, useMemo, useCallback} from 'react';
+import {type AnyAction} from '../types';
 
-export enum AuthActionType {
-  SET_LOGGED_USER = 'AUTH_SET_LOGGED_USER',
-  LOGOUT = 'AUTH_LOGOUT',
+enum AuthActionType {
+  SET_LOGGED_USER = 'SET_LOGGED_USER',
+  LOGOUT = 'LOGOUT',
 }
 
-interface AuthAction {
-  type: string
-  payload?: {
-    username: string
-    role: string
-  }
+interface SetLoggedUser extends AnyAction {
+  type: AuthActionType.SET_LOGGED_USER
+  payload: {username: string, role: string}
 }
+
+interface Logout extends AnyAction {
+  type: AuthActionType.LOGOUT
+}
+
+type AuthAction = SetLoggedUser | Logout;
 
 interface State {
   isLogged: boolean
@@ -19,11 +23,10 @@ interface State {
   role: string
 }
 
-type Dispatch = (action: AuthAction) => void;
-
 interface AuthContextValue {
   state: State
-  authDispatch: Dispatch
+  setLoggedUser: ({username, role}: {username: string, role: string}) => void
+  logout: () => void
 }
 
 const getInitialState = (): State => ({
@@ -32,14 +35,14 @@ const getInitialState = (): State => ({
   role: '',
 });
 
-const AuthReducer = (state: State, action: AuthAction): State => {
-  switch (action.type) {
+const AuthReducer = (state: State, {type, payload}: AuthAction): State => {
+  switch (type) {
     case AuthActionType.SET_LOGGED_USER:
       return {
         // ...state,
         isLogged: true,
-        username: (action.payload != null) ? action.payload.username : '',
-        role: (action.payload != null) ? action.payload.role : '',
+        username: payload.username,
+        role: payload.role,
       };
     case AuthActionType.LOGOUT:
       return {
@@ -56,8 +59,23 @@ const AuthReducer = (state: State, action: AuthAction): State => {
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
-  const [state, authDispatch] = useReducer(AuthReducer, getInitialState());
-  const value = useMemo(() => ({state, authDispatch}), [state, authDispatch]);
+  const [state, dispatch] = useReducer(AuthReducer, getInitialState());
+  const setLoggedUser = useCallback(({username, role}: {username: string, role: string}): void => {
+    dispatch({type: AuthActionType.SET_LOGGED_USER, payload: {username, role}});
+  }, [dispatch]);
+  const logout = useCallback(() => {
+    dispatch({type: AuthActionType.LOGOUT});
+  }, [dispatch]);
+
+  const value = useMemo((): AuthContextValue => ({
+    state,
+    setLoggedUser,
+    logout,
+  }), [
+    state,
+    setLoggedUser,
+    logout,
+  ]);
 
   return (
     <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

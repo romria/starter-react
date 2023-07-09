@@ -1,14 +1,16 @@
 import React, {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import './assets/fonts/fonts.css';
+import './assets/fonts/Inter/inter.scss';
 import './reset.scss';
 import './index.scss';
 import {AppContextProvider} from './state';
-import Root from './routes/root';
+import MainLayout from './layouts/main';
+import Index from './routes/index';
 import Login from './routes/login';
-import RouteNotFound from './routes/route-not-found';
+import RouteError from './routes/route-error';
 import Dashboard from './routes/dashboard';
+import DashboardIndex from './routes/dashboard-index';
 import DashboardUsers from './routes/dashboard-users';
 import DashboardReports from './routes/dashboard-reports';
 
@@ -18,30 +20,26 @@ if (rootElement === null) throw new Error('Failed to find the root element');
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
-    errorElement: <RouteNotFound />,
+    element: <MainLayout />,
+    errorElement: <MainLayout><RouteError /></MainLayout>,
     children: [
+      {index: true, element: <Index />},
+      {path: '/login', element: <Login />},
       {
         path: '/dashboard',
         element: <Dashboard />,
         children: [
-          {
-            path: '/dashboard/users',
-            element: <DashboardUsers />,
-          },
-          {
-            path: '/dashboard/reports',
-            element: <DashboardReports />,
-          },
+          {index: true, element: <DashboardIndex />},
+          {path: '/dashboard/users', element: <DashboardUsers />},
+          {path: '/dashboard/reports', element: <DashboardReports />},
         ],
-      },
-      {
-        path: '/login',
-        element: <Login />,
-        children: [],
       },
     ],
   },
+  // {
+  //   path: '*',
+  //   element: <Navigate to="/" replace />,
+  // },
 ]);
 
 const root = createRoot(rootElement);

@@ -1,0 +1,40 @@
+@import '../../constants/variables.scss';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.actions {
+  flex: 0 0 auto;
+}
+
+.actionButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actionIcon {
+  margin-right: 8px;
+}
+
+.functions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.fnLe {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fnRi {
+  display: flex;
+  justify-content: flex-end;
+}

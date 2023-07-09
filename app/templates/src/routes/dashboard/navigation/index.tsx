@@ -1,10 +1,9 @@
 import React, {type ReactElement} from 'react';
 import {useLocation} from 'react-router-dom';
-import cs from 'classnames';
 import Link from '../../../components/link';
 import SVGHome from '../../../components/svg/home';
 import SVGChartPie from '../../../components/svg/chart-pie';
-import SVGUser from '../../../components/svg/user';
+import SVGApps from '../../../components/svg/apps';
 
 import classes from './navigation.scss';
 
@@ -23,7 +22,7 @@ const NAVI_ELEMENTS: Array<{type: string, route?: string, label: string, Icon?: 
     type: 'link',
     route: '/dashboard/users',
     label: 'Users',
-    Icon: SVGUser,
+    Icon: SVGApps,
   },
   {
     type: 'head',
@@ -42,12 +41,17 @@ const Navigation = (): ReactElement => {
 
   return (
     <div className={classes.navigation}>
-      {NAVI_ELEMENTS.map(({type, route, Icon, label}, i) => {
+      {NAVI_ELEMENTS.map(({type, route, Icon, label}) => {
         if (type === 'link' && Icon !== undefined && route !== undefined) {
-          const isActive = pathname === route;
+          const isActive = pathname.includes(route);
 
           return (
-            <Link key={i} className={cs(classes.naviLink, {[classes.active]: isActive})} to={route}>
+            <Link
+              key={label}
+              className={classes.naviLink}
+              activeClassName={classes.active}
+              to={route}
+            >
               <Icon className={classes.linkIcon} fill={isActive ? '#4A46FF' : undefined} />
               <div className={classes.linkLabel}>{label}</div>
             </Link>
@@ -55,7 +59,7 @@ const Navigation = (): ReactElement => {
         }
 
         return (
-          <div key={i} className={classes.naviHead}>{label}</div>
+          <div key={label} className={classes.naviHead}>{label}</div>
         );
       })}
     </div>

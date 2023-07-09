@@ -2,7 +2,7 @@ import React, {type ReactElement} from 'react';
 import {useRouteError, isRouteErrorResponse} from 'react-router-dom';
 import Link from '../../components/link';
 
-export default function ErrorPage(): ReactElement {
+const RouteError = (): ReactElement => {
   const error = useRouteError();
   let errorMessage: string;
 
@@ -24,4 +24,6 @@ export default function ErrorPage(): ReactElement {
       <Link to="/">Back to Home Page</Link>
     </div>
   );
-}
+};
+
+export default RouteError;

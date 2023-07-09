@@ -1,4 +1,4 @@
-import React, {type ReactElement, type ChangeEvent, type InputHTMLAttributes} from 'react';
+import React, {type ReactElement, type ChangeEvent, type InputHTMLAttributes, useCallback} from 'react';
 import cs from 'classnames';
 
 import classes from './input.scss';
@@ -14,10 +14,10 @@ const Input = ({
   onChange,
   ...props
 }: Props): ReactElement => {
-  const onChangeVal = (e: ChangeEvent<HTMLInputElement>): void => {
+  const onChangeVal = useCallback((e: ChangeEvent<HTMLInputElement>): void => {
     e.preventDefault();
     onChange(e.target.value);
-  };
+  }, [onChange]);
 
   return (
     <input
