@@ -14,7 +14,7 @@ const qsStringify = (body: KeyValuePairs): string => new URLSearchParams(body).t
 // If you need recursive objects/params then install 'qs' lib
 // const qsStringifyRecursive = (body: Record<string, Record | string>): string => qs.stringify(body);
 
-const request = async <T>(params: RequestParams): Promise<{data?: Promise<T>, errors?: string[]}> => {
+export const request = async <T>(params: RequestParams): Promise<{data?: T, errors?: string[]}> => {
   const {
     url = API_BASE_URL,
     headers = REQUEST_HEADERS,
@@ -34,7 +34,7 @@ const request = async <T>(params: RequestParams): Promise<{data?: Promise<T>, er
   try {
     const response = await fetch(url, init);
     if (response.ok) {
-      const json = await response.json() as Promise<T>;
+      const json = await response.json() as T;
       return {data: json};
     }
 
@@ -56,13 +56,13 @@ const request = async <T>(params: RequestParams): Promise<{data?: Promise<T>, er
   }
 };
 
-export const getData = async<T> (body?: KeyValuePairs): Promise<{data?: Promise<T>, errors?: string[]}> => request({
+export const getData = async<T> (body?: KeyValuePairs): Promise<{data?: T, errors?: string[]}> => request({
   url: `${API_BASE_URL}/data`,
   method: 'GET',
   body,
 });
 
-export const submitData = async<T> (body?: KeyValuePairs): Promise<{data?: Promise<T>, errors?: string[]}> => request({
+export const submitData = async<T> (body?: KeyValuePairs): Promise<{data?: T, errors?: string[]}> => request({
   url: `${API_BASE_URL}/submit`,
   method: 'POST',
   body,
