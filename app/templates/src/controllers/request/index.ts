@@ -55,15 +55,3 @@ export const request = async <T>(params: RequestParams): Promise<{data?: T, erro
     return {errors};
   }
 };
-
-export const getData = async<T> (body?: KeyValuePairs): Promise<{data?: T, errors?: string[]}> => request({
-  url: `${API_BASE_URL}/data`,
-  method: 'GET',
-  body,
-});
-
-export const submitData = async<T> (body?: KeyValuePairs): Promise<{data?: T, errors?: string[]}> => request({
-  url: `${API_BASE_URL}/submit`,
-  method: 'POST',
-  body,
-});
