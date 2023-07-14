@@ -6,7 +6,7 @@ interface RequestParams {
   url?: string
   headers?: HeadersInit
   method?: string
-  body?: KeyValuePairs
+  data?: KeyValuePairs
 }
 
 // Recursive objects are not supported here
@@ -19,22 +19,23 @@ export const request = async <T>(params: RequestParams): Promise<{data?: T, erro
     url = API_BASE_URL,
     headers = REQUEST_HEADERS,
     method = 'GET',
-    body = undefined,
+    data,
   } = params;
   const controller = new AbortController();
-  const init = {
+  const targetURL = method === 'GET' || method === 'HEAD' ? `${url}${data ? `?${qsStringify(data)}` : ''}` : url
+  const options = {
     signal: controller.signal,
     method,
     headers,
-    ...((body != null) ? method === 'GET' ? {body: qsStringify(body)} : {body: JSON.stringify(body)} : {}),
+    ...((method !== 'GET' && method !== 'HEAD' && data != null) ? {body: JSON.stringify(data)} : {}),
   };
 
   setTimeout((): void => { controller.abort(); }, REQUEST_TIMEOUT);
 
   try {
-    const response = await fetch(url, init);
+    const response = await fetch(targetURL, options);
     if (response.ok) {
-      const json = await response.json() as T;
+      const json: T = await response.json();
       return {data: json};
     }
 
