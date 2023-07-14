@@ -8,7 +8,7 @@ module.exports = {
   target: 'web',
   entry: './src/index.tsx',
   output: {
-    filename: '[name].[contenthash].js',
+    filename: 'scripts/[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
     assetModuleFilename: '[name][ext][query]'
@@ -31,7 +31,10 @@ module.exports = {
       },
       {
         test: /\.(jpe?g|png|gif)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext][query]'
+        }
       },
       {
         test: /\.svg/i,
@@ -40,7 +43,7 @@ module.exports = {
       {
         test: /\.(eot|otf|ttf|woff|woff2)$/i,
         generator: {
-          filename: '[name][ext][query]'
+          filename: 'fonts/[name][ext][query]'
         }
       }
     ],

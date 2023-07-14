@@ -8,7 +8,7 @@ const commonConfig = require('./webpack.config.common');
 
 module.exports = merge(commonConfig, {
   mode: 'production',
-  devtool: 'source-map',
+  // devtool: 'source-map',
   module: {
     rules: [
       {
@@ -19,7 +19,7 @@ module.exports = merge(commonConfig, {
             loader: 'css-loader', // Translates CSS into CommonJS
             options: {
               modules: {
-                localIdentName: '[name]_[local]_[hash:base64:5]'
+                localIdentName: '[name][local][hash:base64:3]'
               },
             }
           },
@@ -45,7 +45,7 @@ module.exports = merge(commonConfig, {
       }
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+      filename: 'styles/[name].[contenthash].css',
     }),
   ]
 });

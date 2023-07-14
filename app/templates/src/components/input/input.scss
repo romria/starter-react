@@ -6,17 +6,20 @@
   padding: 5px 12px;
   font-size: 14px;
   line-height: 20px;
-  color: #495057;
+  color: $color-font-primary;
   border: 1px solid $color-border-form;
   border-radius: 6px;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
   background: transparent;
 
   &:focus {
-    color: #495057;
-    border-color: #80bdff;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+    box-shadow: 0 0 0 2px $color-outline;
+  }
+
+  &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $color-font-light;
+    opacity: 1; /* Firefox */
   }
 
   &::-moz-focus-inner {

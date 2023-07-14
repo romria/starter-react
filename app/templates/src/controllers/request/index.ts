@@ -2,11 +2,11 @@
 import {API_BASE_URL, REQUEST_HEADERS, REQUEST_TIMEOUT} from '../../config';
 
 type KeyValuePairs = Record<string, string>;
-interface RequestParams {
+interface RequestArgs {
   url?: string
   headers?: HeadersInit
   method?: string
-  data?: KeyValuePairs
+  params?: KeyValuePairs
 }
 
 // Recursive objects are not supported here
@@ -14,20 +14,19 @@ const qsStringify = (body: KeyValuePairs): string => new URLSearchParams(body).t
 // If you need recursive objects/params then install 'qs' lib
 // const qsStringifyRecursive = (body: Record<string, Record | string>): string => qs.stringify(body);
 
-export const request = async <T>(params: RequestParams): Promise<{data?: T, errors?: string[]}> => {
-  const {
-    url = API_BASE_URL,
-    headers = REQUEST_HEADERS,
-    method = 'GET',
-    data,
-  } = params;
+export const request = async <T>({
+  url = API_BASE_URL,
+  headers = REQUEST_HEADERS,
+  method = 'GET',
+  params,
+}: RequestArgs): Promise<{data?: T, errors?: string[]}> => {
   const controller = new AbortController();
-  const targetURL = method === 'GET' || method === 'HEAD' ? `${url}${data ? `?${qsStringify(data)}` : ''}` : url
+  const targetURL = method === 'GET' || method === 'HEAD' ? `${url}${params ? `?${qsStringify(params)}` : ''}` : url
   const options = {
     signal: controller.signal,
     method,
     headers,
-    ...((method !== 'GET' && method !== 'HEAD' && data != null) ? {body: JSON.stringify(data)} : {}),
+    ...((method !== 'GET' && method !== 'HEAD' && params != null) ? {body: JSON.stringify(params)} : {}),
   };
 
   setTimeout((): void => { controller.abort(); }, REQUEST_TIMEOUT);

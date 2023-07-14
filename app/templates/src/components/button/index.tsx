@@ -14,7 +14,11 @@ const Button = ({
   ...props
 }: Props): ReactElement => (
   <button
-    className={cs(classes.button, {[classes.primary]: isPrimary}, className)}
+    className={cs(
+      classes.button,
+      {[classes.primary]: isPrimary},
+      className,
+    )}
     type="button"
     {...props}
   >
