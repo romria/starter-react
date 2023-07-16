@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const {merge} = require('webpack-merge');
 const commonConfig = require('./webpack.config.common');
 
@@ -36,7 +36,7 @@ module.exports = merge(commonConfig, {
     ],
   },
   plugins: [
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({ //<--key to reduce React's size
       PRODUCTION: JSON.stringify(true),
