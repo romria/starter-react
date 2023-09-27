@@ -58,3 +58,11 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+/* global overrides from bootstrap */
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}

@@ -8,7 +8,7 @@ enum AuthActionType {
 
 interface SetLoggedUser extends AnyAction {
   type: AuthActionType.SET_LOGGED_USER
-  payload: {username: string, role: string}
+  payload: { username: string, role: string }
 }
 
 interface Logout extends AnyAction {
@@ -25,7 +25,7 @@ interface State {
 
 interface AuthContextValue {
   state: State
-  setLoggedUser: ({username, role}: {username: string, role: string}) => void
+  setLoggedUser: ({username, role}: { username: string, role: string }) => void
   logout: () => void
 }
 
@@ -58,9 +58,9 @@ const AuthReducer = (state: State, {type, payload}: AuthAction): State => {
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
-export const AuthProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
   const [state, dispatch] = useReducer(AuthReducer, getInitialState());
-  const setLoggedUser = useCallback(({username, role}: {username: string, role: string}): void => {
+  const setLoggedUser = useCallback(({username, role}: { username: string, role: string }): void => {
     dispatch({type: AuthActionType.SET_LOGGED_USER, payload: {username, role}});
   }, [dispatch]);
   const logout = useCallback(() => {

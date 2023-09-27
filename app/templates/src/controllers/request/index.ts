@@ -1,44 +1,87 @@
-// import qs from 'qs';
-import {API_BASE_URL, REQUEST_HEADERS, REQUEST_TIMEOUT} from '../../config';
+import {APPLICATION_JSON, APPLICATION_JSON_UTF8, CONTENT_TYPE} from '../../constants';
+import {API_BASE_URL, DEFAULT_REQUEST_HEADERS, REQUEST_TIMEOUT_DURATION} from '../../config';
+import {attachQueryParams} from '../../utils/api';
 
-type KeyValuePairs = Record<string, string>;
-interface RequestArgs {
+interface RequestParams {
   url?: string
   headers?: HeadersInit
   method?: string
-  params?: KeyValuePairs
+  params?: string | Record<string, any> | any[] | FormData | File
 }
 
-// Recursive objects are not supported here
-const qsStringify = (body: KeyValuePairs): string => new URLSearchParams(body).toString();
-// If you need recursive objects/params then install 'qs' lib
-// const qsStringifyRecursive = (body: Record<string, Record | string>): string => qs.stringify(body);
-
-export const request = async <T>({
-  url = API_BASE_URL,
-  headers = REQUEST_HEADERS,
-  method = 'GET',
-  params,
-}: RequestArgs): Promise<{data?: T, errors?: string[]}> => {
+export const request = async <T>(r: RequestParams): Promise<{ data?: T, errors?: string[] }> => {
+  const {
+    url = API_BASE_URL,
+    headers = {},
+    method = 'GET',
+    params,
+  } = r;
+  const isGETMethod = method === 'GET';
   const controller = new AbortController();
-  const targetURL = method === 'GET' || method === 'HEAD' ? `${url}${params ? `?${qsStringify(params)}` : ''}` : url
-  const options = {
+  const init: Omit<RequestInit, 'headers'> & { headers: Headers } = {
     signal: controller.signal,
     method,
-    headers,
-    ...((method !== 'GET' && method !== 'HEAD' && params != null) ? {body: JSON.stringify(params)} : {}),
+    headers: new Headers({...DEFAULT_REQUEST_HEADERS, ...headers}),
   };
+  const targetURL = isGETMethod ? attachQueryParams(url, params) : url;
 
-  setTimeout((): void => { controller.abort(); }, REQUEST_TIMEOUT);
+  if (params instanceof FormData || params instanceof File) {
+    init.body = params;
+  } else if (params != null && !isGETMethod) {
+    init.body = JSON.stringify(params);
+    init.headers.set(CONTENT_TYPE, APPLICATION_JSON_UTF8);
+  }
+
+  setTimeout((): void => { controller.abort(); }, REQUEST_TIMEOUT_DURATION);
 
   try {
-    const response = await fetch(targetURL, options);
-    if (response.ok) {
-      const json: T = await response.json();
-      return {data: json};
+    const response = await fetch(targetURL, init);
+    const contentType = response.headers.get(CONTENT_TYPE) ?? '';
+
+    if (response.ok) { // code was in the range from 200 to 299
+      /**
+       By default, the expected response 'Content-Type' is 'application/json'.
+       Other expected cases can be defined below.
+       In unexpected cases {data} will be set as undefined.
+       */
+      if (contentType.startsWith(APPLICATION_JSON)) {
+        const json: T = await response.json();
+        return {data: json};
+      } /* else if (contentType.startsWith(TEXT_PLAIN)) {
+        const text = await response.text();
+        return {data: text};
+      }
+      else if (contentType.startsWith(TEXT_HTML)) {
+        const text = await response.text();
+        const parser = new DOMParser();
+        const {title} = parser.parseFromString(text, TEXT_HTML);
+        return {data: {title}};
+      }
+      else if (contentType.startsWith(TEXT_CSV)) {
+        const blob = await response.blob();
+        return {data: blob};
+      } */
+
+      return {data: undefined};
     }
 
-    return {errors: [`HTTP responded with status ${response.status}`]};
+    const errors: string[] = [`${method} ${url.replace(API_BASE_URL, '')} responded with ${response.status}${response.statusText ? `: ${response.statusText}` : ''}`];
+
+    /**
+     By default, the expected error response 'Content-Type' is 'application/json'.
+     Other expected cases can be defined below.
+     */
+    if (contentType.startsWith(APPLICATION_JSON)) {
+      const json = await response.json();
+      errors.push(JSON.stringify(json));
+    } /* else if (contentType.startsWith(TEXT_HTML)) {
+      const text = await response.text();
+      const parser = new DOMParser();
+      const {title} = parser.parseFromString(text, TEXT_HTML);
+      errors.push(`"${title}"`);
+    } */
+
+    return {errors};
   } catch (error) {
     const errors: string[] = [];
 

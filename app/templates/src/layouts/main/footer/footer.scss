@@ -1,10 +1,11 @@
-@import "../../../constants/variables.scss";
+@import "../../../styles/variables.scss";
 
 .footer {
-  flex: 0 0 24px;
-
-  //margin-top: auto;
-  //background-color: $bg-footer;
+  max-width: $max-page-width;
+  width: 100%;
+  margin: 0 auto;
+  flex: 0 0 30px;
+  height: 30px;
   border-top: 1px solid $color-border;
   display: flex;
   justify-content: center;

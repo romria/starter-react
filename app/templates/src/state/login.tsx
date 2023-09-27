@@ -56,7 +56,7 @@ const LoginReducer = (state: State, {type, payload}: LoginAction): State => {
 
 const LoginContext = createContext<LoginContextValue | undefined>(undefined);
 
-export const LoginProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
+export const LoginProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
   const [state, dispatch] = useReducer(LoginReducer, getInitialState());
   const changeLoginFormValue = useCallback((field: keyof State, value: string) => {
     dispatch({type: LoginActionType.CHANGE_FORM_VALUE, payload: {field, value}});

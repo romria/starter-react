@@ -7,7 +7,7 @@ const RouteError = (): ReactElement => {
   let errorMessage: string;
 
   if (isRouteErrorResponse(error)) {
-    errorMessage = `${error.status} - ${error.statusText}. "${(error.error != null) ? error.error.message : ''}"`;
+    errorMessage = `${error.status} - ${error.statusText}.${(error.data != null) ? ` "${JSON.stringify(error.data)}"` : ''}`;
   } else if (error instanceof Error) {
     errorMessage = error.message;
   } else if (typeof error === 'string') {

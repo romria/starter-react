@@ -6,7 +6,7 @@ import SVGChartPie from '../../../components/svg/chart-pie';
 
 import classes from './navigation.scss';
 
-const NAVI_ELEMENTS: Array<{type: string, route?: string, label: string, Icon?: React.FC<{fill?: string, className?: string}>}> = [
+const NAVI_ELEMENTS: Array<{ type: string, route?: string, label: string, Icon?: React.FC<{ fill?: string, className?: string }> }> = [
   {
     type: 'link',
     route: '/dashboard',

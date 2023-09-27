@@ -1,5 +1,6 @@
 import React, {type FormEvent, type ReactElement, useEffect, useCallback} from 'react';
 import {useNavigate} from 'react-router-dom';
+// import {login} from '../../api/auth';
 import Input from '../../components/input';
 import Button from '../../components/button';
 import {useAuth} from '../../state/auth';
@@ -25,15 +26,20 @@ const Login = (): ReactElement => {
     [changeLoginFormValue],
   );
 
-  const onSubmit = useCallback((e: FormEvent<HTMLFormElement>): void => {
+  const onSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // ToDo: submit form request Promise
+    // const {data, errors} = await login({username, password});
+    const {data, errors} = await Promise.resolve({data: {}, errors: undefined});
 
-    setLoggedUser({username, role: 'admin'});
-    clearLoginForm();
-    navigate('/dashboard');
-  }, [setLoggedUser, clearLoginForm, navigate, username]);
+    if (errors) {
+      // console.error(errors);
+    } else if (data) {
+      setLoggedUser({username, role: 'admin'});
+      clearLoginForm();
+      navigate('/dashboard');
+    }
+  }, [setLoggedUser, clearLoginForm, navigate, username/* password */]);
 
   return (
     <div className={classes.login}>
@@ -45,9 +51,9 @@ const Login = (): ReactElement => {
         <div className={classes.label}>Username</div>
         <Input
           className={classes.input}
-          id="username"
+          // id="username"
           type="text"
-          name="username"
+          // name="username"
           value={username}
           required
           onChange={onChangeUsername}
@@ -55,9 +61,9 @@ const Login = (): ReactElement => {
         <div className={classes.label}>Password</div>
         <Input
           className={classes.input}
-          id="password"
+          // id="password"
           type="password"
-          name="password"
+          // name="password"
           value={password}
           required
           onChange={onChangePassword}

@@ -1,5 +1,8 @@
-@import '../../constants/variables.scss';
+@import '../../styles/variables.scss';
 
 .main {
-  flex: 1 0 auto;
+  max-width: $max-page-width;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1 1 auto;
 }

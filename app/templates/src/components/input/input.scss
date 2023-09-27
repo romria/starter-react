@@ -1,11 +1,11 @@
-@import "../../constants/variables.scss";
+@import "../../styles/variables.scss";
 
 .input {
   box-sizing: border-box;
   display: block;
-  padding: 5px 12px;
+  padding: 6.5px 8px;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 21px;
   color: $color-font-primary;
   border: 1px solid $color-border-form;
   border-radius: 6px;
@@ -25,5 +25,27 @@
   &::-moz-focus-inner {
     border: 0;
     padding: 0;
+  }
+
+  &:disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: .6;
+  }
+
+  &:read-only {
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+
+  &.loading {
+    cursor: progress !important;
+    opacity: .6;
+  }
+
+  &.fullWidth {
+    width: 100%;
   }
 }

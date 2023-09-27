@@ -9,7 +9,7 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     filename: 'scripts/[name].[contenthash].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     publicPath: '/',
     assetModuleFilename: '[name][ext][query]'
   },
@@ -58,7 +58,7 @@ module.exports = {
             plugins: [
               ["gifsicle", { interlaced: true }],
               ["jpegtran", { progressive: true }],
-              ["optipng", { optimizationLevel: 5 }],
+              ["optipng", { optimizationLevel: 3 }],
               [
                 "svgo",
                 {
