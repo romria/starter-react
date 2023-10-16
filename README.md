@@ -1,11 +1,11 @@
-## React.js app generator
+## React.js app starter
 
 This is a [React](https://react.dev/) application starter. Minimalistic setup which includes some basic packages, no additional bottlenecks included.
 
 Includes:
 * React v18
-* React Router v6
-* Webpack v5 (with several basic plugins)
+* React Router DOM v6
+* Webpack v5 (with some plugins included)
 * Typescript v5
 * Eslint v8
 * Stylelint v15

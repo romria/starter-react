@@ -73,6 +73,9 @@
       "consistent": true
     }],
     "lines-between-class-members": [2, "always", { "exceptAfterSingleLine": true }],
+    "@typescript-eslint/prefer-optional-chain": 0,
+    "@typescript-eslint/prefer-nullish-coalescing": 0,
+    "@typescript-eslint/strict-boolean-expressions": 1,
     "import/prefer-default-export": 0,
     // https://github.com/airbnb/javascript/blob/master/packages/eslint-config-airbnb-base/rules/imports.js#L139
     "import/extensions": [
@@ -85,8 +88,6 @@
         "tsx": "never"
       }
     ],
-    "@typescript-eslint/strict-boolean-expressions": 1,
-    "@typescript-eslint/no-explicit-any": 1,
     "react/no-array-index-key": 1,
     "react/jsx-props-no-spreading": 1,
     "react/no-unused-state": 1,
@@ -95,7 +96,8 @@
     "react-hooks/exhaustive-deps": 2,
     "jsx-a11y/no-static-element-interactions": 0,
     "jsx-a11y/click-events-have-key-events": 0,
-    "jsx-a11y/control-has-associated-label": 0
+    "jsx-a11y/control-has-associated-label": 1,
+    "jsx-a11y/img-redundant-alt": 1
   },
   "overrides": [
     {
