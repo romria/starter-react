@@ -1,6 +1,6 @@
 ## React.js app generator
 
-This is a [React](https://react.dev/) app generator. Minimalistic setup which includes only basic packages, no additional bottlenecks included.
+This is a [React](https://react.dev/) application starter. Minimalistic setup which includes some basic packages, no additional bottlenecks included.
 
 Includes:
 * React v18
@@ -11,28 +11,18 @@ Includes:
 * Stylelint v15
 
 ### Requirements
-* [Node.js](https://nodejs.org/) v18.11.0 or higher
-* [Yeoman](https://yeoman.io) v5.x
+* [Node.js](https://nodejs.org/) v18.x or higher
 
 ### Installation
-You can just clone the [/app/templates](https://github.com/romria/generator-react-app/tree/main/app/templates) directory content as a starter kit or use a Yeoman generator instead
-
-Install the generator globally from this public repository:
 
 ```bash
-npm install -g https://github.com/romria/generator-react-app
+npm install
 ```
 
-### Update
-If you already installed this generator before, you might want to update it
+### Run the app in a development mode
 
 ```bash
-npm update -g https://github.com/romria/generator-react-app
+npm start
 ```
 
-### Usage
-Navigate to a fresh project directory and run generate command:
-
-```bash
-yo react-app
-```
+Open in a browser [http://localhost:8000](http://localhost:8000)
